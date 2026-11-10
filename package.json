@@ -1,0 +1,1 @@
+{"description":"Video Downloader — download videos from YouTube, TikTok, Facebook and Instagram using free APIs only. Static frontend + Vercel Serverless Functions, no build step, no dependencies.","engines":{"node":">=18"},"name":"video-downloader-website","private":true,"version":"1.0.0"}

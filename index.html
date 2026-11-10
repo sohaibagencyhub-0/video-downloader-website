@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Video Downloader — Download Videos Online, Fast &amp; Free</title>
+  <meta name="description" content="Download videos from YouTube, TikTok, Facebook and Instagram online. Fast, free and easy — no installation required." />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+  <!-- ================= Header ================= -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#6b0f1a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 21h16"/></svg>
+        </span>
+        <span class="brand-name">Video Downloader</span>
+      </a>
+      <nav class="header-nav">
+        <div class="dropdown">
+          <button class="nav-btn" id="toolsMenuBtn" type="button" aria-haspopup="true" aria-expanded="false">All Tools
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="dropdown-menu" id="toolsMenu" hidden>
+            <button type="button" data-tool="youtube">YouTube Downloader</button>
+            <button type="button" data-tool="tiktok">TikTok Downloader</button>
+            <button type="button" data-tool="instagram">Instagram Downloader</button>
+            <button type="button" data-tool="facebook">Facebook Downloader</button>
+          </div>
+        </div>
+        <label class="lang-picker" for="langSelect">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.9 5.7 3.9 9S14.5 18.4 12 21c-2.5-2.6-3.9-5.7-3.9-9S9.5 5.6 12 3Z"/></svg>
+          <select id="langSelect" aria-label="Language">
+            <option value="en" selected>English</option>
+          </select>
+        </label>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ================= Hero ================= -->
+    <section class="hero">
+      <h1>Online Video Downloader</h1>
+      <p class="hero-sub">Fast, Free and Easy Video Downloads Online</p>
+    </section>
+
+    <!-- ================= Converter card ================= -->
+    <section class="converter" id="converter">
+      <form id="convertForm" novalidate>
+        <div class="url-row">
+          <div class="url-wrap">
+            <input id="urlInput" type="url" inputmode="url" autocomplete="off" spellcheck="false"
+              placeholder="https://www.youtube.com/watch?v=…" aria-label="Video link" />
+            <button id="pasteBtn" type="button" class="paste-btn" title="Paste from clipboard" aria-label="Paste from clipboard">
+              <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+              <span>Paste</span>
+            </button>
+          </div>
+          <span id="platformBadge" class="platform-badge" hidden></span>
+        </div>
+        <p id="pasteHint" class="hint" hidden>Clipboard blocked by your browser — press Ctrl+V to paste.</p>
+        <p id="toolHint" class="hint" hidden></p>
+
+        <div class="controls-row">
+          <div class="seg-toggle" role="group" aria-label="Format">
+            <button type="button" class="seg-btn active" data-format="mp4">MP4</button>
+            <button type="button" class="seg-btn" data-format="mp3">MP3</button>
+          </div>
+
+          <label class="quality-label" for="qualitySelect">Video quality
+            <select id="qualitySelect">
+              <option value="720" selected>720p</option>
+              <option value="480">480p</option>
+              <option value="360">360p</option>
+            </select>
+          </label>
+
+          <button id="convertBtn" type="submit" class="convert-btn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 21h16"/></svg>
+            <span id="convertLabel">Convert to MP4</span>
+          </button>
+        </div>
+
+        <div class="terms-strip">
+          <input type="checkbox" id="termsCheckbox" />
+          <label for="termsCheckbox">I have read and agree to the <button type="button" class="linklike" data-modal="termsModal">Terms of Use</button> and <button type="button" class="linklike" data-modal="privacyModal">Privacy Policy</button>, and will only download content I'm authorized to.</label>
+        </div>
+
+        <p id="formError" class="error" role="alert" hidden></p>
+      </form>
+
+      <!-- ================= Results ================= -->
+      <div id="results" class="results" hidden>
+        <div class="result-head">
+          <img id="resultThumb" class="result-thumb" src="" alt="Video thumbnail" />
+          <div class="result-meta">
+            <h2 id="resultTitle"></h2>
+            <p><span id="resultPlatform" class="platform-badge"></span>
+            <span id="resultSource" class="source-note"></span></p>
+          </div>
+        </div>
+        <div id="optionList" class="option-list"></div>
+        <p class="result-note">Your file downloads through our server, so the download starts right away.</p>
+      </div>
+    </section>
+
+    <!-- ================= How to Download ================= -->
+    <section class="howto">
+      <h2>How to Download</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <h3>Copy the video link</h3>
+          <p>Open the video on YouTube, TikTok, Facebook or Instagram and copy its link from the address bar or the Share button.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <h3>Paste the link and click Convert</h3>
+          <p>Paste the link into the box above — or tap Paste — choose MP4 or MP3, pick a quality and press Convert.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <h3>Choose quality and press Download</h3>
+          <p>Pick the quality you want and press Download. The file is saved straight to your device.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Why choose us ================= -->
+    <section class="why">
+      <h2>Why choose us?</h2>
+      <div class="features">
+        <div class="feature"><h3>Supports Multiple Platforms</h3><p>Download from YouTube, TikTok, Facebook and Instagram with one tool.</p></div>
+        <div class="feature"><h3>Fast &amp; Reliable Downloads</h3><p>Our server fetches the video for you, so downloads start quickly and rarely fail.</p></div>
+        <div class="feature"><h3>Simple &amp; User-Friendly</h3><p>Paste a link, press Convert, press Download. No accounts, no learning curve.</p></div>
+        <div class="feature"><h3>Free Essentials</h3><p>The core downloader is free to use — no subscription and no payment details.</p></div>
+        <div class="feature"><h3>High-Quality Video Saving</h3><p>Save videos in up to 720p HD, or grab just the audio as MP3.</p></div>
+        <div class="feature"><h3>No Installation Required</h3><p>Everything runs in your browser. Nothing to install on your phone or computer.</p></div>
+      </div>
+    </section>
+
+    <!-- ================= Our Tools ================= -->
+    <section class="tools">
+      <h2>Our Tools</h2>
+      <div class="tool-row">
+        <button type="button" data-tool="youtube">YouTube</button>
+        <button type="button" data-tool="instagram">Instagram</button>
+        <button type="button" data-tool="tiktok">TikTok</button>
+        <button type="button" data-tool="facebook">Facebook</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= Footer ================= -->
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-brand">Video Downloader</p>
+      <nav class="footer-links">
+        <button type="button" data-modal="contactModal">Contact Us</button>
+        <button type="button" data-modal="termsModal">Terms of Service</button>
+        <button type="button" data-modal="privacyModal">Privacy Policy</button>
+      </nav>
+      <p class="copyright">© 2026 Video Downloader</p>
+    </div>
+  </footer>
+
+  <!-- ================= Modals ================= -->
+  <div class="modal" id="termsModal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="termsTitle">
+      <button class="modal-close" type="button" data-close aria-label="Close">✕</button>
+      <h2 id="termsTitle">Terms of Service</h2>
+      <p>Use this tool only to download content you own or are authorized to download. Respect the copyright and terms of the platform the video comes from. Free third-party services power the conversions, so availability and quality can vary. We are not responsible for how downloaded content is used.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="privacyModal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
+      <button class="modal-close" type="button" data-close aria-label="Close">✕</button>
+      <h2 id="privacyTitle">Privacy Policy</h2>
+      <p>Links you paste are sent to our server only to resolve the video. We do not create accounts, we do not sell your data, and we do not keep your pasted links after the download is prepared. Basic technical logs may be kept briefly for abuse prevention.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="contactModal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+      <button class="modal-close" type="button" data-close aria-label="Close">✕</button>
+      <h2 id="contactTitle">Contact Us</h2>
+      <p>Found a broken link or a video that will not convert? Tell us which platform and link failed and we will look into it.</p>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
